@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Book Lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Year</th>
+      <th>Author</th>
+      <th>Publisher</th>
+      <th>Number of pages</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @book_lists.each do |book_list| %>
+      <tr>
+        <td><%= book_list.name %></td>
+        <td><%= book_list.description %></td>
+        <td><%= book_list.year %></td>
+        <td><%= book_list.author %></td>
+        <td><%= book_list.publisher %></td>
+        <td><%= book_list.number_of_pages %></td>
+        <td><%= link_to 'Show', book_list %></td>
+        <td><%= link_to 'Edit', edit_book_list_path(book_list) %></td>
+        <td><%= link_to 'Destroy', book_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Add to my profile' , book_lists_add_to_profile_path, :controller => :book_lists, :action => :add_to_profile , method: :post%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Book List', new_book_list_path %>

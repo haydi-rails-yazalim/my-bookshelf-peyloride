@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @book_list.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @book_list.description %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @book_list.year %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @book_list.author %>
+</p>
+
+<p>
+  <strong>Publisher:</strong>
+  <%= @book_list.publisher %>
+</p>
+
+<p>
+  <strong>Number of pages:</strong>
+  <%= @book_list.number_of_pages %>
+</p>
+
+<%= link_to 'Edit', edit_book_list_path(@book_list) %> |
+<%= link_to 'Back', book_lists_path %>
