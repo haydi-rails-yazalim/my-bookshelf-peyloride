@@ -27,7 +27,8 @@
         <td><%= link_to 'Show', book_list %></td>
         <td><%= link_to 'Edit', edit_book_list_path(book_list) %></td>
         <td><%= link_to 'Destroy', book_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Add to my profile' , book_lists_add_to_profile_path, :controller => :book_lists, :action => :add_to_profile , method: :post%></td>
+        <td><%= link_to 'Add to my profile' , book_lists_add_to_profile_path(:id => book_list.id),
+                                              :controller => :book_lists, :action => :add_to_profile , method: :post %></td>
       </tr>
     <% end %>
   </tbody>

@@ -63,8 +63,7 @@ class BookListsController < ApplicationController
   end
 
   def add_to_profile
-    @book_list = UsersBook.new(user_id: current_user.id, book_list_id: @book_list.id)
-    @book_list.save
+    UsersBook.create(user_id: current_user.id, book_list_id: params[:id])
   end
 
   private
