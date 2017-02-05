@@ -1,39 +1,82 @@
+<script type="text/x-template" id="book_list-row">
+  <tr>
+    <td>{{ book_list.name }}</td>
+    <td>{{ book_list.description }}</td>
+    <td>{{ book_list.year }}</td>
+    <td>{{ book_list.author }}</td>
+    <td>{{ book_list.publisher }}</td>
+    <td>{{ book_list.number_of_pages }}</td>
+  </tr>
+</script>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Book Lists</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Year</th>
-      <th>Author</th>
-      <th>Publisher</th>
-      <th>Number of pages</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @book_lists.each do |book_list| %>
+<div id="book_lists">
+  <table>
+    <thead>
       <tr>
-        <td><%= book_list.name %></td>
-        <td><%= book_list.description %></td>
-        <td><%= book_list.year %></td>
-        <td><%= book_list.author %></td>
-        <td><%= book_list.publisher %></td>
-        <td><%= book_list.number_of_pages %></td>
-        <td><%= link_to 'Show', book_list %></td>
-        <td><%= link_to 'Edit', edit_book_list_path(book_list) %></td>
-        <td><%= link_to 'Destroy', book_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Add to my profile' , book_lists_add_to_profile_path(:id => book_list.id),
-                                              :controller => :book_lists, :action => :add_to_profile , method: :post %></td>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Year</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Number of pages</th>
+        <th></th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <tr
+        is="book_list-row"
+        v-for="book_list in book_lists"
+        :book_list="book_list">
+      </tr>
+      <tr>
+        <td>
+          <!-- Input -->
+          <input type="text" v-model="book_list.name"><br>
+          <!-- Validation errors -->
+          <span style="color:red">{{ errors.name }}</span>
+        </td>
+        <td>
+          <!-- Input -->
+          <input type="text" v-model="book_list.description"><br>
+          <!-- Validation errors -->
+          <span style="color:red">{{ errors.description }}</span>
+        </td>
+        <td>
+          <!-- Input -->
+          <input type="text" v-model="book_list.year"><br>
+          <!-- Validation errors -->
+          <span style="color:red">{{ errors.year }}</span>
+        </td>
+        <td>
+          <!-- Input -->
+          <input type="text" v-model="book_list.author"><br>
+          <!-- Validation errors -->
+          <span style="color:red">{{ errors.author }}</span>
+        </td>
+        <td>
+          <!-- Input -->
+          <input type="text" v-model="book_list.publisher"><br>
+          <!-- Validation errors -->
+          <span style="color:red">{{ errors.publisher }}</span>
+        </td>
+        <td>
+          <!-- Input -->
+          <input type="text" v-model="book_list.number_of_pages"><br>
+          <!-- Validation errors -->
+          <span style="color:red">{{ errors.number_of_pages }}</span>
+        </td>
+
+        <!-- button click calls hireEmployee -->
+        <td><button @click="addBookList">Add Book</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <br>
-
-<%= link_to 'New Book List', new_book_list_path %>

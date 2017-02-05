@@ -6,6 +6,7 @@ class BookListsController < ApplicationController
   # GET /book_lists.json
   def index
     @book_lists = BookList.all
+    respond_to :html, :json
   end
 
   # GET /book_lists/1
@@ -25,17 +26,8 @@ class BookListsController < ApplicationController
   # POST /book_lists
   # POST /book_lists.json
   def create
-    @book_list = BookList.new(book_list_params)
-
-    respond_to do |format|
-      if @book_list.save
-        format.html { redirect_to @book_list, notice: 'Book list was successfully created.' }
-        format.json { render :show, status: :created, location: @book_list }
-      else
-        format.html { render :new }
-        format.json { render json: @book_list.errors, status: :unprocessable_entity }
-      end
-    end
+    @book_list = BookList.create(book_list_params)
+    render :json => @book_list
   end
 
   # PATCH/PUT /book_lists/1
