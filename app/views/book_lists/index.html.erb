@@ -1,11 +1,56 @@
 <script type="text/x-template" id="book_list-row">
   <tr>
-    <td>{{ book_list.name }}</td>
-    <td>{{ book_list.description }}</td>
-    <td>{{ book_list.year }}</td>
-    <td>{{ book_list.author }}</td>
-    <td>{{ book_list.publisher }}</td>
-    <td>{{ book_list.number_of_pages }}</td>
+    <td>
+      <!-- Show input when in edit mode -->
+      <div v-if="editMode">
+        <input type="text" v-model="book_list.name"><br>
+        <span style="color:red">{{ errors.name }}</span>
+      </div>
+      <div v-else>{{ book_list.name }}</div>
+    </td>
+    <td>
+      <div v-if="editMode">
+        <input type="text" v-model="book_list.description"><br>
+        <span style="color:red">{{ errors.description }}</span>
+      </div>
+      <div v-else>{{ book_list.description }}</div>
+    </td>
+    <td>
+      <div v-if="editMode">
+        <input type="text" v-model="book_list.year"><br>
+        <span style="color:red">{{ errors.year }}</span>
+      </div>
+      <div v-else>{{ book_list.year }}</div>
+    </td>
+    <td>
+      <div v-if="editMode">
+        <input type="text" v-model="book_list.author"><br>
+        <span style="color:red">{{ errors.author }}</span>
+      </div>
+      <div v-else>{{ book_list.author }}</div>
+    </td>
+    <td>
+      <div v-if="editMode">
+        <input type="text" v-model="book_list.publisher"><br>
+        <span style="color:red">{{ errors.publisher }}</span>
+      </div>
+      <div v-else>{{ book_list.publisher }}</div>
+    </td>
+    <td>
+      <div v-if="editMode">
+        <input type="text" v-model="book_list.number_of_pages"><br>
+        <span style="color:red">{{ errors.number_of_pages }}</span>
+      </div>
+      <div v-else>{{ book_list.number_of_pages }}</div>
+    </td>
+
+    <td>
+      <!-- Save button calls updateEmployee -->
+      <button v-if="editMode" @click="updateBookList">Save</button>
+      <!-- Edit button puts row into edit mode -->
+      <button v-else @click="editMode = true">Edit</button>
+      <button v-if="!editMode" @click="deleteBookList" style="color:red">Delete</button>
+    </td>
   </tr>
 </script>
 

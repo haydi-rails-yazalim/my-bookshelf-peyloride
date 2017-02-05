@@ -26,21 +26,20 @@ class BookListsController < ApplicationController
   # POST /book_lists
   # POST /book_lists.json
   def create
-    @book_list = BookList.create(book_list_params)
-    render :json => @book_list
+    if @book_list = BookList.create(book_list_params)
+      render :json => @book_list
+    else
+      render :json => { :errors => @book_list.errors.messages }, :status => 422
+    end
   end
 
   # PATCH/PUT /book_lists/1
   # PATCH/PUT /book_lists/1.json
   def update
-    respond_to do |format|
-      if @book_list.update(book_list_params)
-        format.html { redirect_to @book_list, notice: 'Book list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @book_list }
-      else
-        format.html { render :edit }
-        format.json { render json: @book_list.errors, status: :unprocessable_entity }
-      end
+    if @book_list.update(book_list_params)
+      render :json => @book_list
+    else
+      render :json => { :errors => @book_list.errors.messages }, :status => 422
     end
   end
 
@@ -48,10 +47,7 @@ class BookListsController < ApplicationController
   # DELETE /book_lists/1.json
   def destroy
     @book_list.destroy
-    respond_to do |format|
-      format.html { redirect_to book_lists_url, notice: 'Book list was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    render :json => {}, :status => :no_content
   end
 
   def add_to_profile
