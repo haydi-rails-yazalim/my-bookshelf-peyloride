@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'book_lists#index'
 
   devise_for :users
   resources :book_lists,  :except => [:new, :edit]
